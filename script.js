@@ -1,3 +1,5 @@
+"use strict";
+
 // 1. Say you have a function, primitiveMultiply, that in 20% of cases multiplies two
 // numbers and in the other 80% of cases raises an exception of type
 // MultiplicatorUnitFailure. Write a function that wraps this clunky function and just
@@ -17,5 +19,16 @@ function primitiveMultiply(a, b) {
 }
 
 function reliableMultiply(a, b) {
-  // Your code here.
+  try {
+    return primitiveMultiply(a, b);
+  } catch (error) {
+    if (error instanceof MultiplicatorUnitFailure) {
+      return reliableMultiply(a, b);
+    }
+  }
 }
+
+console.log(reliableMultiply(3, 20));
+
+
+
